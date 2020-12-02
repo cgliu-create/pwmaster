@@ -295,19 +295,41 @@
       let size = document.getElementById("id_size").value;
       let password = "";
       if (letters || punctuation || digits){
-        characters = "";
+        setnum = 0;
+        idletters = idpunctuation = iddigits = 4;
+        letterchars = 'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ';
+        punctuationchars = '!#$%&()*+, -./:;<=>?@[\]^_{|}~';
+        digitchars = '0123456789';
         if (letters){
-          characters += 'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ';
+          setnum += 1;
+          idletters = setnum - 1;
         }
         if (punctuation){
-          characters += '!#$%&()*+, -./:;<=>?@[\]^_{|}~';
+          setnum += 1;
+          idpunctuation = setnum - 1;
         }
         if (digits){
-          characters += '0123456789';
+          setnum += 1;
+          iddigits = setnum - 1; 
         }
         for (let index = 0; index < size; index++) {
-          let choice = getRandomIntInclusive(0, characters.length-1);
-          let char = characters.charAt(choice);
+          let setchoice = 0;
+          if (setnum > 1){
+            setchoice = getRandomIntInclusive(0, setnum-1);
+          }
+          let char = ""
+          if (setchoice == idletters){
+            let choice = getRandomIntInclusive(0, letterchars.length-1);
+            char = letterchars.charAt(choice);
+          }
+          if (setchoice == idpunctuation){
+            let choice = getRandomIntInclusive(0, punctuationchars.length-1);
+            char = punctuationchars.charAt(choice);
+          }
+          if (setchoice == iddigits){
+            let choice = getRandomIntInclusive(0, digitchars.length-1);
+            char = digitchars.charAt(choice);
+          }
           password += char;
         }
       }
