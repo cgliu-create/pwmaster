@@ -97,8 +97,6 @@ html, body {
 .lrspace {
   margin: 20px;
   padding: 10px;
-  border: 2px solid #041626;
-  border-radius: 20px;
 }
 
 .topsection {
@@ -248,7 +246,7 @@ h1 {
     font-size: 15px;
   }
 
-  input[type=text], [type=password], [type=email], [type=url], [type=number] {
+  .short {
     max-width: 100px;
   }
 }
