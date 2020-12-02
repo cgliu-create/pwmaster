@@ -50,6 +50,9 @@ def signin(request):
             if olduser is not None:
                 form.sendNotification(olduser)
                 login(request, olduser)
+            else:
+               context = {"mainmessage":'Invalid Credentials'}
+               return renderauth(request, "msg.html", context)  
     return redirect("home")
 
 def signout(request):
