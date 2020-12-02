@@ -24,5 +24,6 @@ http://127.0.0.1:8000/
 
 ## Info
 the project stores all the data locally in a db.sqlite3 file
+
 additionally, you will need to set a SECRET_KEY environment variable
 for the django secret key
