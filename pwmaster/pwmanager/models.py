@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Password(models.Model):
     name = models.CharField(max_length=100)
+    website = models.CharField(max_length=100, default="")
     websitelink = models.URLField(max_length=100)
     pword = models.CharField(max_length=100)
     user = models.ForeignKey(

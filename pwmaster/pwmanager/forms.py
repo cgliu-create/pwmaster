@@ -37,18 +37,22 @@ class PasswordForm(ModelForm):
 
     class Meta:
         model = Password
-        fields = ('name', 'websitelink', 'pword', )
+        fields = ('name', 'website', 'websitelink', 'pword', )
 
 class DeleteForm(forms.Form):
     oldname = forms.CharField(label='Old Username:', max_length=100, required=False)
+    oldwebsite = forms.CharField(label='Old Website:', max_length=100, required=False)
     oldpword = forms.CharField(label='Old Pword:', max_length=100, required=False)
 
     def deletePassword(self, xuser):
         oldname = self.cleaned_data['oldname']
+        oldwebsite = self.cleaned_data['oldwebsite'] 
         oldpword = self.cleaned_data['oldpword'] 
         passwords = Password.objects.filter(user=User(id=xuser.id))
         if oldname:
             passwords = passwords.filter(name=oldname)
+        if oldwebsite:
+            passwords = passwords.filter(website=oldwebsite)
         if oldpword:
             passwords = passwords.filter(pword=oldpword)
         old = passwords.first()
@@ -56,8 +60,10 @@ class DeleteForm(forms.Form):
 
 class ChangeForm(ModelForm):
     oldname = forms.CharField(label='Old Username:', max_length=100, required=False)
+    oldwebsite = forms.CharField(label='Old Website:', max_length=100, required=False)
     oldpword = forms.CharField(label='Old Pword:', max_length=100, required=False)
     name = forms.CharField(label='Username:', max_length=100, required=False)
+    website = forms.CharField(label='Website:', max_length=100, required=False)
     websitelink = forms.URLField(label='Websitelink:', max_length=100, required=False)
     pword = forms.CharField(label='Pword:', max_length=100, required=False)
     
@@ -68,11 +74,15 @@ class ChangeForm(ModelForm):
                password.name = self.cleaned_data['name']
             else: 
                 password.name = old.name
+            if self.cleaned_data['website']:
+                password.website = self.cleaned_data['website']
+            else: 
+                password.website = old.website
             if self.cleaned_data['websitelink']:
                 password.websitelink = self.cleaned_data['websitelink']
             else: 
                 password.websitelink = old.websitelink
-            if self.cleaned_data['oldpword']:
+            if self.cleaned_data['pword']:
                 password.pword = self.cleaned_data['pword']
             else: 
                 password.pword = old.pword

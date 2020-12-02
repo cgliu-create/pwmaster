@@ -15,78 +15,104 @@
 <div class="section-box">
   <div class="content topsection">
     <div class="banner100 center">
-        <div class="vstack centertext"> 
-          
-          <form method="post"> 
-            {% csrf_token %} 
-            <div class="banner100 center">
-              <div class="vstack lefttext">
-                <br>
-                <label for="id_letters" class="checkcontainer"> Letters
-                  <input type="checkbox" checked="checked" name="letters" id="id_letters">
-                  <span class="checkmark"></span>
-                </label>
-                <label for="id_punctuation" class="checkcontainer"> Punctuation
-                  <input type="checkbox" name="punctuation" id="id_punctuation">
-                  <span class="checkmark"></span>
-                </label>
-                <label for="id_digits" class="checkcontainer"> Digits
-                  <input type="checkbox" name="digits" id="id_digits">
-                  <span class="checkmark"></span>
-                </label>
-                <br>
-                <label for="id_size"> Size</label>
-                <input type="number" name="size" required="" value="10" id="id_size">
-              </div>
-            </div>
-            <div class="banner100 center">
-              <div class="hstack">
-                <button class="otherbutton" type="submit">Generate</button>
-              </div>
-            </div>
-          </form> 
-          {% if generatedpw %}  
-            <input type="text" id="myInput" value="{{ generatedpw }}">
-            <div class="tooltip">
-              <button onclick="myFunction()" onmouseout="outFunc()">
-                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                Copy
-              </button>
-            </div>
-          {% endif %} 
-          {% if user %}  
-            <h1>{{ user.first_name}}  {{ user.last_name}}</h1>
-          {% endif %}  
-          {% if signout %}
-            <div class="banner100 center"> 
-              <div class="hstack">
-                <button id="addpassword">Add</button>
-                <button id="changepassword">Change</button>
-                <button id="deletepassword">Delete</button>
-              </div>
-            </div>
-          {% endif %}
          
-          {% if passwords %}
-          <table>
-            <tr>
-              <th>Username</th>
-              <th>Password</th>
-            </tr>
-            {% for password in passwords %}
+          <div class="hstack textsectiona">
+
+            <div class="lrspace vstack">
+              <form method="post"> 
+                {% csrf_token %} 
+                <div class="banner100 center">
+                  <div class="vstack lefttext">
+                    <br>
+                    <label for="id_letters" class="checkcontainer"> Letters
+                      <input type="checkbox" checked="checked" name="letters" id="id_letters">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label for="id_punctuation" class="checkcontainer"> Punctuation
+                      <input type="checkbox" name="punctuation" id="id_punctuation">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label for="id_digits" class="checkcontainer"> Digits
+                      <input type="checkbox" name="digits" id="id_digits">
+                      <span class="checkmark"></span>
+                    </label>
+                    <br>
+                    <label for="id_size"> Size</label>
+                    <input type="number" name="size" required="" value="10" id="id_size">
+                  </div>
+                </div>
+                <div class="banner100 center">
+                  <div class="hstack">
+                    <button class="otherbutton" type="submit">Generate</button>
+                  </div>
+                </div>
+              </form>
+              {% if generatedpw %}  
+              <b><hr></b>
+              <div class="banner100 center">
+                <div class="tooltip">
+                  <button onclick="copyFunc('ginputfield', 'gtooltip')" onmouseout="outFunc('gtooltip')">
+                    <span class="tooltiptext" id="gtooltip">Copy to clipboard</span>
+                    <input type="text" id="ginputfield" value="{{ generatedpw }}">
+                  </button>
+                </div>
+              </div>
+              {% endif %} 
+          </div>
+          
+          <div class="lrspace vstack">
+            {% if user %}  
+            <div class="banner100 center"> 
+              <h1>{{ user.first_name}}  {{ user.last_name}}</h1>
+            </div>
+            {% endif %}  
+            {% if signout %}
+              <div class="banner100 center"> 
+                <div class="hstack">
+                  <button id="addpassword">Add</button>
+                  <button id="changepassword">Change</button>
+                  <button id="deletepassword">Delete</button>
+                </div>
+              </div>
+              <b><hr></b>
+            {% endif %}
+
+            {% if passwords %}
+            <table class="centertext">
               <tr>
-                <td>
-                  <a target="_blank" rel="noopener noreferrer" href="{{password.websitelink}}">
-                    {{ password.name }}
-                  </a>
-                </td>
-                <td>
-                  {{ password.pword }}
-                </td>
+                <th>Website</th>
+                <th>Username</th>
+                <th>Password</th>
               </tr>
-            {% endfor %}
-          {% endif %}
-          </table> 
+              {% for password in passwords %}
+                <tr>
+                  <td>
+                    <a target="_blank" rel="noopener noreferrer" href="{{password.websitelink}}">
+                      {{ password.website }}
+                    </a>
+                  </td>
+                  <td>
+                    <div class="tooltip">
+                      <button onclick="copyFunc('{{ password.name }}inputfield', '{{ password.name }}tooltip')" onmouseout="outFunc('{{ password.name }}tooltip')">
+                        <span class="tooltiptext" id="{{ password.name }}tooltip">Copy to clipboard</span>
+                        <input type="text" id="{{ password.name }}inputfield" value="{{ password.name }}">
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="tooltip">
+                      <button onclick="copyFunc('{{ password.name }}pinputfield', '{{ password.name }}ptooltip')" onmouseout="outFunc('{{ password.name }}ptooltip')">
+                        <span class="tooltiptext" id="{{ password.name }}ptooltip">Copy to clipboard</span>
+                        <input type="text" id="{{ password.name }}pinputfield" value="{{ password.pword }}">
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+            </table> 
+          </div> 
+
         </div>
     </div>
   </div>
@@ -206,18 +232,18 @@
 
 
 <script>
-  function myFunction() {
-    var copyText = document.getElementById("myInput");
+  function copyFunc(inputid, tooltipid) {
+    var copyText = document.getElementById(inputid);
     copyText.select();
     copyText.setSelectionRange(0, 99999);
     document.execCommand("copy");
 
-    var tooltip = document.getElementById("myTooltip");
+    var tooltip = document.getElementById(tooltipid);
     tooltip.innerHTML = "Copied";
   }
 
-  function outFunc() {
-    var tooltip = document.getElementById("myTooltip");
+  function outFunc(tooltipid) {
+    var tooltip = document.getElementById(tooltipid);
     tooltip.innerHTML = "Copy to clipboard";
   } 
 </script>
@@ -237,22 +263,11 @@
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: 150%;
+    bottom: 100%;
     left: 50%;
     margin-left: -75px;
     opacity: 0;
     transition: opacity 0.3s;
-  }
-  
-  .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
   }
   
   .tooltip:hover .tooltiptext {
