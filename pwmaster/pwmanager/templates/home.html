@@ -7,21 +7,90 @@
 {% block external %}
   {% load static %}
   <script src="{%static '/js/togglemodals.js' %}"></script>
+  
 {% endblock %}
 
 
 {% block stuff %} 
 <div class="section-box">
   <div class="content topsection">
-    
-    <div class="textsectiona hstack banner100">
-      <h1>
-      </h1>
+    <div class="banner100 center">
+        <div class="vstack centertext"> 
+          
+          <form method="post"> 
+            {% csrf_token %} 
+            <div class="banner100 center">
+              <div class="vstack lefttext">
+                <br>
+                <label for="id_letters" class="checkcontainer"> Letters
+                  <input type="checkbox" checked="checked" name="letters" id="id_letters">
+                  <span class="checkmark"></span>
+                </label>
+                <label for="id_punctuation" class="checkcontainer"> Punctuation
+                  <input type="checkbox" name="punctuation" id="id_punctuation">
+                  <span class="checkmark"></span>
+                </label>
+                <label for="id_digits" class="checkcontainer"> Digits
+                  <input type="checkbox" name="digits" id="id_digits">
+                  <span class="checkmark"></span>
+                </label>
+                <br>
+                <label for="id_size"> Size</label>
+                <input type="number" name="size" required="" value="10" id="id_size">
+              </div>
+            </div>
+            <div class="banner100 center">
+              <div class="hstack">
+                <button class="otherbutton" type="submit">Generate</button>
+              </div>
+            </div>
+          </form> 
+          {% if generatedpw %}  
+            <input type="text" id="myInput" value="{{ generatedpw }}">
+            <div class="tooltip">
+              <button onclick="myFunction()" onmouseout="outFunc()">
+                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                Copy
+              </button>
+            </div>
+          {% endif %} 
+          {% if user %}  
+            <h1>{{ user.first_name}}  {{ user.last_name}}</h1>
+          {% endif %}  
+          {% if signout %}
+            <div class="banner100 center"> 
+              <div class="hstack">
+                <button id="addpassword">Add</button>
+                <button id="changepassword">Change</button>
+                <button id="deletepassword">Delete</button>
+              </div>
+            </div>
+          {% endif %}
+         
+          {% if passwords %}
+          <table>
+            <tr>
+              <th>Username</th>
+              <th>Password</th>
+            </tr>
+            {% for password in passwords %}
+              <tr>
+                <td>
+                  <a target="_blank" rel="noopener noreferrer" href="{{password.websitelink}}">
+                    {{ password.name }}
+                  </a>
+                </td>
+                <td>
+                  {{ password.pword }}
+                </td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+          </table> 
+        </div>
     </div>
-
   </div>
 </div>
-
 <div id="signupform" class="modal">
   <div class="content">
     <form action="{% url 'signup' %}" method="post"> 
@@ -95,25 +164,103 @@
   </div>
 </div>
 
-<div id="generateform" class="modal">
+<div id="changeform" class="modal">
   <div class="content">
-    <form action="{% url 'generate' %}" method="post"> 
+    <form action="{% url 'update' %}" method="post"> 
       {% csrf_token %} 
       <div class="banner100 center">
         <div class="vstack">
           <br>
-          {{ generatorform }}
+          {{ changeform }}
         </div>
       </div>
       <div class="banner100 center">
         <div class="hstack">
-          <a id="generatepasswordcancel" class="otherbutton">CANCEL</a>
+          <a id="changecancel" class="otherbutton">CANCEL</a>
           <button type="submit" class="colorbutton purpleb">SUBMIT</button>
         </div>
       </div>
     </form> 
   </div>
 </div>
+
+<div id="deleteform" class="modal">
+  <div class="content">
+    <form action="{% url 'delete' %}" method="post"> 
+      {% csrf_token %} 
+      <div class="banner100 center">
+        <div class="vstack">
+          <br>
+          {{ deleteform }}
+        </div>
+      </div>
+      <div class="banner100 center">
+        <div class="hstack">
+          <a id="deletecancel" class="otherbutton">CANCEL</a>
+          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+
+
+<script>
+  function myFunction() {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copied";
+  }
+
+  function outFunc() {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  } 
+</script>
+<style>
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  </style>
+
 {% endblock %}
 
 

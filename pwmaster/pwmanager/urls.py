@@ -9,5 +9,4 @@ urlpatterns = [
     path("create", views.createpassword, name="create"), 
     path("update", views.updatepassword, name="update"), 
     path("delete", views.deletepassword, name="delete"), 
-    path("generate", views.generatepassword, name="generate"), 
 ]

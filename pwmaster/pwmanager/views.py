@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
-from django.contrib.auth import login, authenticate
-from .forms import SignUpForm, PasswordForm, PasswordGeneratorForm
-from .models import Password, Manager
+from django.contrib.auth import login, authenticate, logout
+from .forms import SignUpForm, PasswordForm, PasswordGeneratorForm, ChangeForm, DeleteForm
+from .models import Password
 from .authmenu import renderauth, mergeDict
 from django.contrib.auth.models import User
 import string
@@ -13,16 +13,24 @@ def home(request):
     context = {
         'signupform': SignUpForm(),
         'passwordform': PasswordForm(),
+        'changeform': ChangeForm(),
+        'deleteform': DeleteForm(),
         'generatorform': PasswordGeneratorForm(),
     }
+    if request.method == 'POST':
+        form = PasswordGeneratorForm(request.POST)
+        if form.is_valid():
+            password = form.newPassword()
+            pwcontext = {'generatedpw':password, }
+            temp = mergeDict(context, pwcontext)
+            context = temp
+
     if request.user.is_authenticated:
         xuser = request.user
         passwords = Password.objects.filter(user=User(id=xuser.id))
-        manager = Manager.objects.get(user=User(id=xuser.id))
         authcontext = {
             'user': xuser,
             'passwords': passwords,
-            'manager': manager,
         }
         temp = mergeDict(context, authcontext)
         context = temp
@@ -33,18 +41,15 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             newuser = form.saveUser()
-            manager = Manager.objects.create(user=User(id=newuser.id))
-            manager.pword = ""
-            manager.save()
     return redirect("home")
 
 def signin(request):
     if request.method == 'POST':
         username = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
+        xuser = authenticate(request, username=username, password=password)
+        if xuser is not None:
+            login(request, xuser)
     return redirect("home")
 
 def signout(request):
@@ -55,48 +60,31 @@ def createpassword(request):
     if request.method == 'POST':
         form = PasswordForm(request.POST)
         if form.is_valid() and request.user.is_authenticated:
-            user = request.user 
-            form.savePassword(user)
+            xuser = request.user 
+            form.savePassword(xuser)
     return redirect("home")
 
 def updatepassword(request):
     if request.method == 'POST':
-        if request.user.is_authenticated:
-            xuser = request.user 
-            xname = self.cleaned_data['name']
-            xpwword = self.cleaned_data['pword']
-            passwords = Password.objects.filter(user=xuser.id)
-            passwords = passwords.filter(name=xname)
-            passwords = passwords.filter(pwword=xpwword)
-            passwords.first().delete()
-        form = PasswordForm(request.POST)
+        form = ChangeForm(request.POST)
         if form.is_valid() and request.user.is_authenticated:
-            user = request.user 
-            form.savePassword(user)
+            xuser = request.user 
+            oldname = request.POST['oldname']
+            oldpword = request.POST['oldpword']
+            passwords = Password.objects.filter(user=User(id=xuser.id))
+            if oldname:
+                passwords = passwords.filter(name=oldname)
+            if oldpword:
+                passwords = passwords.filter(pword=oldpword)
+            old = passwords.first()
+            form.changePassword(xuser, old)
+            old.delete()
     return redirect("home")
 
 def deletepassword(request):
     if request.method == 'POST':
-        if request.user.is_authenticated:
-            xuser = request.user 
-            xname = self.cleaned_data['name']
-            xpwword = self.cleaned_data['pword']
-            passwords = Password.objects.filter(user=User(id=xuser.id))
-            passwords = passwords.filter(name=xname)
-            passwords = passwords.filter(pwword=xpwword)
-            passwords.first().delete()
-    return redirect("home")
-
-def generatepassword(request):
-    if request.method == 'POST':
-        form = PasswordGeneratorForm(request.POST)
+        form = DeleteForm(request.POST)
         if form.is_valid() and request.user.is_authenticated:
             xuser = request.user 
-            password = form.newPassword()
-            manager = Manager.objects.get(user=User(id=xuser.id))
-            manager.pword = password
-            manager.save()
+            form.deletePassword(xuser)
     return redirect("home")
-
-
-

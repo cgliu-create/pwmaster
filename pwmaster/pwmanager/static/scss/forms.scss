@@ -1,6 +1,6 @@
 @use 'variables';
 
-input[type=text], [type=password], [type=email], [type=url], textarea {
+input[type=text], [type=password], [type=email], [type=url], textarea, [type=number]{
     width: 500px;
     padding: 12px;
     border: 2px solid variables.$darkblue-color; 
