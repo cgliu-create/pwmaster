@@ -26,15 +26,15 @@
                       <input type="checkbox" checked="checked" name="letters" id="id_letters">
                       <span class="checkmark"></span>
                     </label>
-                    <label for="id_punctuation" class="checkcontainer"> Punctuation
-                      <input type="checkbox" name="punctuation" id="id_punctuation">
-                      <span class="checkmark"></span>
-                    </label>
                     <label for="id_digits" class="checkcontainer"> Digits
                       <input type="checkbox" name="digits" id="id_digits">
                       <span class="checkmark"></span>
                     </label>
-                    <br>
+                    <label for="id_punctuation" class="checkcontainer"> Punctuation
+                      <input type="checkbox" name="punctuation" id="id_punctuation">
+                      <span class="checkmark"></span>
+                    </label>
+                    <input class="short" type="text" name="acceptablepunc" value="!@#$%^&*()" id="id_acceptablepunc">
                     <label for="id_size"> Size</label>
                     <input class="short" type="number" name="size" required="" value="10" id="id_size">
                   </div>
@@ -329,7 +329,7 @@
         setnum = 0;
         idletters = idpunctuation = iddigits = 4;
         letterchars = 'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ';
-        punctuationchars = '!#$%&()*+, -./:;<=>?@[\]^_{|}~';
+        punctuationchars = document.getElementById("id_acceptablepunc").value;
         digitchars = '0123456789';
         if (letters){
           setnum += 1;
