@@ -3,9 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
-from .models import Password, PasswordGenerator
-import string
-import random
+from .models import Password
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -135,28 +133,3 @@ class ChangeForm(ModelForm):
     class Meta:
         model = Password
         fields = ('name', 'websitelink', 'pword', )
-
-class PasswordGeneratorForm(ModelForm):
-
-    def newPassword(self):
-        letters = self.cleaned_data['letters'] 
-        punctuation = self.cleaned_data['punctuation'] 
-        digits = self.cleaned_data['digits'] 
-        size = self.cleaned_data['size'] 
-        password = ""
-        if letters or punctuation or digits:
-            characters = ""
-            if letters:
-                characters += string.ascii_letters
-            if punctuation:
-                characters += string.punctuation
-            if digits:
-                characters += string.digits
-            for x in range(size):
-                char = random.choice(characters)
-                password = password + char
-        return password
-
-    class Meta:
-        model = PasswordGenerator
-        fields = ('letters', 'punctuation', 'digits', 'size') 

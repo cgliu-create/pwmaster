@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm, SignInForm,  PasswordForm, PasswordGeneratorForm, ChangeForm, DeleteForm
+from .forms import SignUpForm, SignInForm,  PasswordForm, ChangeForm, DeleteForm
 from .models import Password
 from .authmenu import renderauth, mergeDict
 from django.contrib.auth.models import User
-import string
-import random
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .token import account_activation_token
@@ -19,16 +17,7 @@ def home(request):
         'passwordform': PasswordForm(),
         'changeform': ChangeForm(),
         'deleteform': DeleteForm(),
-        'generatorform': PasswordGeneratorForm(),
     }
-    if request.method == 'POST':
-        form = PasswordGeneratorForm(request.POST)
-        if form.is_valid():
-            password = form.newPassword()
-            pwcontext = {'generatedpw':password, }
-            temp = mergeDict(context, pwcontext)
-            context = temp
-
     if request.user.is_authenticated:
         xuser = request.user
         passwords = Password.objects.filter(user=User(id=xuser.id))

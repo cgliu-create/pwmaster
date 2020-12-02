@@ -13,9 +13,3 @@ class Password(models.Model):
         on_delete=models.CASCADE,
         related_name='user_password',
     )
-
-class PasswordGenerator(models.Model):
-    letters = models.BooleanField()
-    punctuation = models.BooleanField()
-    digits = models.BooleanField()
-    size = models.IntegerField()
