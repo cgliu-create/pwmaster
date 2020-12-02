@@ -43,7 +43,7 @@
                 </div>
                 <div class="banner100 center">
                   <div class="hstack">
-                    <button class="otherbutton" type="submit">Generate</button>
+                    <button class="bubble" type="submit">Generate</button>
                   </div>
                 </div>
               </form>
@@ -117,6 +117,13 @@
     </div>
   </div>
 </div>
+
+<div class="section-box">
+  <div class="content topsection">
+
+  </div>
+</div>
+
 <div id="signupform" class="modal">
   <div class="content">
     <form action="{% url 'signup' %}" method="post"> 
@@ -133,8 +140,8 @@
       </div>
       <div class="banner100 center">
         <div class="hstack">
-          <a id="signupcancel" class="otherbutton">CANCEL</a>
-          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+          <a id="signupcancel" >CANCEL</a>
+          <button type="submit" class="bubble">SUBMIT</button>
         </div>
       </div>
     </form> 
@@ -161,9 +168,9 @@
       </div>
       <div class="banner100 center">
         <div class="hstack">
-          <a id="signincancel" class="otherbutton">CANCEL</a>
+          <a id="signincancel" >CANCEL</a>
           <a href="">FORGOT PASSWORD</a>
-          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+          <button type="submit" class="bubble">SUBMIT</button>
         </div>
       </div>
     </form> 
@@ -182,8 +189,8 @@
       </div>
       <div class="banner100 center">
         <div class="hstack">
-          <a id="addpasswordcancel" class="otherbutton">CANCEL</a>
-          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+          <a id="addpasswordcancel" >CANCEL</a>
+          <button type="submit" class="bubble">SUBMIT</button>
         </div>
       </div>
     </form> 
@@ -202,8 +209,8 @@
       </div>
       <div class="banner100 center">
         <div class="hstack">
-          <a id="changecancel" class="otherbutton">CANCEL</a>
-          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+          <a id="changecancel" >CANCEL</a>
+          <button type="submit" class="bubble">SUBMIT</button>
         </div>
       </div>
     </form> 
@@ -222,14 +229,19 @@
       </div>
       <div class="banner100 center">
         <div class="hstack">
-          <a id="deletecancel" class="otherbutton">CANCEL</a>
-          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+          <a id="deletecancel" >CANCEL</a>
+          <button type="submit" class="bubble">SUBMIT</button>
         </div>
       </div>
     </form> 
   </div>
 </div>
 
+<div class="section-box">
+  <div class="content topsection">
+
+  </div>
+</div>
 
 <script>
   function copyFunc(inputid, tooltipid) {

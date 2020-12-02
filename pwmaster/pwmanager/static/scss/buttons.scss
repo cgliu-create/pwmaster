@@ -1,57 +1,21 @@
 @use 'variables';
 
-
-.colorbutton{
-    margin-bottom: 10px; 
-    padding: 14px 16px;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    text-decoration: none;
-    border-radius: 20px;
-}
-.colorbutton:hover{
-    border-bottom: 5px solid variables.$darkblue-color;
-} 
-.purpleb{
-    background-color: variables.$highlightpurple-color;
-    color: white;
-}
-.redb{
-    background-color: variables.$highlightred-color;
-    color: white
-}
-.greenb{
-    background-color: variables.$highlightgreen-color;
-    color: white
-}
-
-.editbutton{
-    border: 2px solid black;
-    padding: 5px;
-    margin-left: 10px;
-    padding-left: 10px;
-    background: none;
-    border-radius: 20px; 
-    width: fit-content; 
-    height: fit-content;
-}
-.editbutton:hover{
-    background: black;
-    color: white;
-}
-
-.otherbutton {
-    float: left;
+button {
     font-size: 20px;
     font-weight: bold;
     padding: 14px 16px;
     text-decoration: none;
-    color: #041626;
+    color: variables.$darkblue-color;
     border: none;
     background: none; 
 }
-  
-.otherbutton:hover {
-    border-bottom: 5px solid #041626;
+
+.bubble{
+    border: 2px solid variables.$darkblue-color;
+    border-radius: 20px;
+    background-color: variables.$darkblue-color;
+    color: variables.$white-color;
+}
+.bubble:hover{
+    opacity: 0.7;
 }

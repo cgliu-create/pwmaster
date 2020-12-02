@@ -23,10 +23,10 @@
     <div id="mobilenav">
       <div class="hstack">
         {% if signin %}
-        <button id="signinA">SIGN IN</button>
+        <button id="signinA" class="hoverbutton">SIGN IN</button>
         {% endif %}
         {% if signup %}
-        <button id="signupA">SIGN UP FREE</button>
+        <button id="signupA" class="bubble">SIGN UP FREE</button>
         {% endif %}
         {% if signout %}
         <a href="/signout">SIGN OUT</a>
@@ -37,10 +37,10 @@
     <div id="navbanner">
       <div class="floatright">
         {% if signin %}
-        <button id="signinB">SIGN IN</button>
+        <button id="signinB" class="hoverbutton">SIGN IN</button>
         {% endif %}
         {% if signup %}
-        <button id="signupB">SIGN UP FREE</button>
+        <button id="signupB" class="bubble">SIGN UP FREE</button>
         {% endif %}
         {% if signout %}
         <a href="/signout">SIGN OUT</a>
@@ -48,7 +48,7 @@
       </div>
     </div>
     
-    <button id="hamburger">
+    <button id="hamburger" class="hoverbutton">
       <i class='fas fa-bars'></i>
     </button>
 </div>
@@ -63,9 +63,9 @@
 
 <footer class="center">
     <div class="vstack">
-      <div class="hstack">
-      </div>
+      <div> <br> </div>
       <div class="centertext"> Created By Christopher G Liu</div>
+      <div> <br> </div>
     </div>
 </footer>
 </body>

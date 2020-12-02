@@ -1,3 +1,5 @@
+@use 'variables';
+
 /* The container */
 .checkcontainer {
   display: block;
@@ -28,17 +30,17 @@
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: lightgray;
 }
 
 /* On mouse-over, add a grey background color */
 .checkcontainer:hover input ~ .checkmark {
-  background-color: #ccc;
+  background-color: gray;
 }
 
 /* When the checkbox is checked, add a blue background */
 .checkcontainer input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: variables.$darkblue-color;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -59,7 +61,7 @@
   top: 5px;
   width: 5px;
   height: 10px;
-  border: solid white;
+  border: solid variables.$white-color;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

@@ -69,15 +69,6 @@ html, body {
 .lighttext{
    color: variables.$white-color;
 }
-.highlighttextred{
-   color: variables.$highlightred-color;
-}
-.highlighttextgreen{
-   color: variables.$highlightgreen-color;
-}
-.highlighttextpurple{
-   color: variables.$highlightpurple-color;
-}
 
 .section-box {
   position: relative;
@@ -89,8 +80,10 @@ html, body {
   min-height: 200px;
 }
 .lrspace{
-   margin-left: 20px;
-   margin-right: 20px;
+   margin: 20px;
+   padding: 10px;
+   border: 2px solid variables.$darkblue-color;
+   border-radius: 20px;
 }
 .topsection{
    margin-top: 70px;
