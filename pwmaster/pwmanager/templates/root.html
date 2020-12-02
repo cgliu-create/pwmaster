@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+{% load static %}
+<link rel="stylesheet" href="{%static '/css/root.css' %}">
+{% load static %}
+<script src="{%static '/js/mobile.js' %}"></script>
+
+<title>{% block title %} {% endblock %}</title> 
+{% block external %} {% endblock %}
+</head>
+<body>
+<div id="fixedtop">
+  <div class="vstack floatleft">
+    <a href="{% url 'home' %}">
+      {% load static %}
+      <img id="navlogo" src="{%static '/images/logo.png' %}" alt="logo" class="floatleft">
+    </a>
+    <div id="mobilenav">
+      <div class="hstack">
+        {% if signin %}
+        <a id="signin" href="{% url 'signinPage' %}">SIGN IN</a>
+        {% endif %}
+        {% if signup %}
+        <a id="signup" class="colorbutton redb" href="{% url 'signupPage' %}">SIGN UP FREE</a>
+        {% endif %}
+        {% if signout %}
+        <a id="signout" class="colorbutton redb" href="{% url 'signoutPage' %}">SIGN OUT</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+    <div id="navbanner">
+      <div class="floatright">
+        {% if signin %}
+        <a id="signin" href="{% url 'signinPage' %}">SIGN IN</a>
+        {% endif %}
+        {% if signup %}
+        <a id="signup" class="colorbutton redb" href="{% url 'signupPage' %}">SIGN UP FREE</a>
+        {% endif %}
+        {% if signout %}
+        <a id="signout" class="colorbutton redb" href="{% url 'signoutPage' %}">SIGN OUT</a>
+        {% endif %}
+      </div>
+    </div>
+    
+    <button id="hamburger">
+      <i class='fas fa-bars'></i>
+    </button>
+</div>
+
+<div class="section-box">
+  <div class="content topsection">
+   
+    {% block stuff %} {% endblock %}
+   
+  </div>
+</div>
+
+<footer class="center">
+    <div class="vstack">
+      <div class="hstack">
+      </div>
+      <div class="centertext"> Created By Christopher G Liu</div>
+    </div>
+</footer>
+</body>
+</html>

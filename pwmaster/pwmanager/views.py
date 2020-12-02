@@ -46,6 +46,10 @@ def signin(request):
             login(request, user)
     return redirect("home")
 
+def signout(request):
+    logout(request)
+    return redirect("home")
+
 def createpassword(request):
     if request.method == 'POST':
         form = PasswordForm(request.POST)
