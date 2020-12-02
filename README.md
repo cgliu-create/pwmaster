@@ -10,9 +10,9 @@ create a python virtual environment
 ```bash
 mkdir env ; virtualenv ./env
 ```
-add Django
+add Django and other dependencies
 ```bash
-source env/bin/activate ; pip install Django
+source env/bin/activate ; pip install -r requirements.txt
 ```
 go to the website folder (where manage.py is)
 ```bash

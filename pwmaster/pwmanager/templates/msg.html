@@ -1,0 +1,39 @@
+{% extends "root.html" %}
+
+{% block title %}
+    Password Manager
+{% endblock %}
+
+{% block external %}
+{% endblock %}
+
+{% block stuff %} 
+<div class="section-box">
+    <div class="content topsection">
+        <div class="banner100 center">
+            <div class="vstack centertext">
+                {% if mainmessage %}
+                   <h1>
+                      {{ mainmessage }}
+                   </h1>
+                {% endif %}
+                {% if submessage %}
+                    <h2>
+                      {{ submessage }}
+                    </h2>
+                {% endif %}
+                {% if form.errors %} 
+                    {% for error in form.errors %}
+                        <h4>{{error}}</h4>
+                    {% endfor %} 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="content">
+    </div>
+    <div class="content">
+    </div>
+</div>
+{% endblock %}
+        
