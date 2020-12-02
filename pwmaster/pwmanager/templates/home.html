@@ -78,31 +78,51 @@
                 <th>Website</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th></th>
               </tr>
               {% for password in passwords %}
                 <tr>
                   <td>
-                    <a target="_blank" rel="noopener noreferrer" href="{{password.websitelink}}">
+                    <a target="_blank" rel="noopener noreferrer" href="{{ password.websitelink }}">
                       {{ password.website }}
                     </a>
                   </td>
                   <td>
                     <div class="tooltip">
-                      <button onclick="copyFunc('{{ password.name }}inputfield', '{{ password.name }}tooltip')" onmouseout="outFunc('{{ password.name }}tooltip')">
-                        <span class="tooltiptext" id="{{ password.name }}tooltip">Copy to clipboard</span>
-                        <input class="short" type="text" id="{{ password.name }}inputfield" value="{{ password.name }}">
+                      <button onclick="copyFunc('{{ password.website}}{{ password.pword }}{{ password.name }}inputname', '{{ password.website}}{{ password.pword }}{{ password.name }}tooltipa')" onmouseout="outFunc('{{ password.website}}{{ password.pword }}{{ password.name }}tooltipa')">
+                        <span class="tooltiptext" id="{{ password.website}}{{ password.pword }}{{ password.name }}tooltipa">Copy to clipboard</span>
+                        <input onchange="matchInput('{{ password.website}}{{ password.pword }}{{ password.name }}inputname', '{{ password.website}}{{ password.pword }}hiddenname')" onmouseout="matchInput('{{ password.website}}{{ password.pword }}{{ password.name }}inputname', '{{ password.website}}{{ password.pword }}hiddenname')" class="short" type="text" id="{{ password.website}}{{ password.pword }}{{ password.name }}inputname" value="{{ password.name }}">
                       </button>
                     </div>
                   </td>
                   <td>
                     <div class="tooltip">
-                      <button onclick="copyFunc('{{ password.name }}pinputfield', '{{ password.name }}ptooltip')" onmouseout="outFunc('{{ password.name }}ptooltip')">
-                        <span class="tooltiptext" id="{{ password.name }}ptooltip">Copy to clipboard</span>
-                        <input class="short" type="text" id="{{ password.name }}pinputfield" value="{{ password.pword }}">
+                      <button onclick="copyFunc('{{ password.website}}{{ password.pword }}inputpword', '{{ password.website}}{{ password.pword }}tooltipb')" onmouseout="outFunc('{{ password.website}}{{ password.pword }}tooltipb')">
+                        <span class="tooltiptext" id="{{ password.website}}{{ password.pword }}tooltipb">Copy to clipboard</span>
+                        <input onchange="matchInput('{{ password.website}}{{ password.pword }}inputpword', '{{ password.website}}{{ password.pword }}hiddenpword')" onmouseout="matchInput('{{ password.website}}{{ password.pword }}inputpword', '{{ password.website}}{{ password.pword }}hiddenpword')" class="short" type="text" id="{{ password.website}}{{ password.pword }}inputpword" value="{{ password.pword }}">
                       </button>
                     </div>
                   </td>
+                  <td>
+                      <form action="{% url 'update' %}" method="post"> 
+                        {% csrf_token %} 
+                        <div class="hidden">
+                          <input type="text" name="name" maxlength="100" id="{{ password.website}}{{ password.pword }}hiddenname">
+                          <input type="url" name="websitelink" maxlength="100" id="id_websitelink">
+                          <input type="text" name="website" maxlength="100" id="id_website">
+                          <input type="text" name="pword" maxlength="100" id="{{ password.website}}{{ password.pword }}hiddenpword">
+                          <input type="text" name="oldname" maxlength="100" id="id_oldname" value="{{ password.name }}">
+                          <input type="text" name="oldwebsitelink" maxlength="100" id="id_oldwebsitelink" value="{{ password.websitelink }}">
+                          <input type="text" name="oldwebsite" maxlength="100" id="id_oldwebsite" value="{{ password.website }}">
+                          <input type="text" name="oldpword" maxlength="100" id="id_oldpword" value="{{ password.pword }}">
+                        </div>
+                        <button class="bubble" type="submit" style="margin-bottom: 15px;">
+                          Change
+                        </button>
+                      </form>
+                  </td>
                 </tr>
+            
               {% endfor %}
             {% endif %}
             </table> 
@@ -193,9 +213,20 @@
     <form action="{% url 'update' %}" method="post"> 
       {% csrf_token %} 
       <div class="banner100 center">
-        <div class="vstack">
-          <br>
-          {{ changeform }}
+        <div class="hstack textsectiona">
+            <div class="lrspace vstack">
+              <label for="id_name">Username:</label><input type="text" name="name" maxlength="100" id="id_name">
+              <label for="id_websitelink">Websitelink:</label><input type="url" name="websitelink" maxlength="100" id="id_websitelink">
+              <label for="id_website">Website:</label><input type="text" name="website" maxlength="100" id="id_website">
+              <label for="id_pword">Pword:</label><input type="text" name="pword" maxlength="100" id="id_pword">
+            </div>
+            <div class="lrspace vstack">
+              <label for="id_oldname">Old Username:</label><input type="text" name="oldname" maxlength="100" id="id_oldname">
+              <label for="id_oldwebsite">Old Website:</label><input type="text" name="oldwebsite" maxlength="100" id="id_oldwebsite">
+              <label for="id_oldwebsitelink">Old Websitelink:</label><input type="url" name="oldwebsitelink" maxlength="100" id="id_oldwebsitelink">
+              <label for="id_oldpword">Old Pword:</label><input type="text" name="oldpword" maxlength="100" id="id_oldpword">
+           
+            </div> 
         </div>
       </div>
       <div class="banner100 center">
@@ -334,6 +365,12 @@
         }
       }
       document.getElementById("ginputfield").value = password;
+    }
+
+    function matchInput(ida, idb) {
+      var a = document.getElementById(ida)
+      var b = document.getElementById(idb)
+      b.value = a.value;
     }
 
   </script>

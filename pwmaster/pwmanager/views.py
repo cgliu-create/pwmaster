@@ -50,6 +50,9 @@ def signin(request):
             if olduser is not None:
                 form.sendNotification(olduser)
                 login(request, olduser)
+            else:
+               context = {"mainmessage":'Invalid Credentials'}
+               return renderauth(request, "msg.html", context)  
     return redirect("home")
 
 def signout(request):
@@ -69,16 +72,23 @@ def updatepassword(request):
         form = ChangeForm(request.POST)
         if form.is_valid() and request.user.is_authenticated:
             xuser = request.user 
+            oldwebsite = request.POST['oldwebsite']
+            oldwebsitelink = request.POST['oldwebsitelink']
             oldname = request.POST['oldname']
             oldpword = request.POST['oldpword']
             passwords = Password.objects.filter(user=User(id=xuser.id))
+            if oldwebsite:
+                passwords = passwords.filter(website=oldwebsite)
+            if oldwebsitelink:
+                passwords = passwords.filter(websitelink=oldwebsitelink)
             if oldname:
                 passwords = passwords.filter(name=oldname)
             if oldpword:
                 passwords = passwords.filter(pword=oldpword)
             old = passwords.first()
-            form.changePassword(xuser, old)
-            old.delete()
+            if old:
+                form.changePassword(xuser, old)
+                old.delete()
     return redirect("home")
 
 def deletepassword(request):

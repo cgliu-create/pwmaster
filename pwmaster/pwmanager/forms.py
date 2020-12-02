@@ -97,11 +97,13 @@ class DeleteForm(forms.Form):
         if oldpword:
             passwords = passwords.filter(pword=oldpword)
         old = passwords.first()
-        old.delete()
+        if old:
+            old.delete()
 
 class ChangeForm(ModelForm):
     oldname = forms.CharField(label='Old Username:', max_length=100, required=False)
     oldwebsite = forms.CharField(label='Old Website:', max_length=100, required=False)
+    oldwebsitelink = forms.URLField(label='Old Websitelink:', max_length=100, required=False)
     oldpword = forms.CharField(label='Old Pword:', max_length=100, required=False)
     name = forms.CharField(label='Username:', max_length=100, required=False)
     website = forms.CharField(label='Website:', max_length=100, required=False)
