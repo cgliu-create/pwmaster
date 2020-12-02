@@ -6,16 +6,39 @@ simply use git to clone this repository
 ```bash
 git clone https://github.com/cgliu-create/pwmaster.git
 ```
-## Usage
-in the project folder, activate the python virtual environment
+create a python virtual environment
 ```bash
-source env/bin/activate
+mkdir env ; virtualenv ./env
 ```
-next, go to the website folder 
+add Django
+```bash
+source env/bin/activate ; pip install Django
+```
+go to the website folder (where manage.py is)
 ```bash
 cd pwmaster
 ```
-then, run the website
+add a db.sqlite3 file
+```bash
+touch db.sqlite3
+```
+create tables
+```bash
+python manage.py migrate
+```
+
+## Usage
+go to the project folder
+
+activate the python virtual environment
+```bash
+source env/bin/activate
+```
+go to the website folder 
+```bash
+cd pwmaster
+```
+run the website
 ```bash
 python manage.py runserver
 ```
