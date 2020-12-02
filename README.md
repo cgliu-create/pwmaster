@@ -29,7 +29,9 @@ python manage.py migrate
 
 ## Usage
 go to the project folder
-
+```bash
+cd pwmaster
+```
 activate the python virtual environment
 ```bash
 source env/bin/activate
@@ -42,7 +44,8 @@ run the website
 ```bash
 python manage.py runserver
 ```
-afterwards, go to the link for your local server
+afterwards, go to the link for your local server:
+
 http://127.0.0.1:8000/
 
 ## Info
