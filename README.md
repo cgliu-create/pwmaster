@@ -46,7 +46,7 @@ python manage.py runserver
 ```
 afterwards, go to the link for your local server:
 
-http://127.0.0.1:8000/
+http://localhost:8000
 
 ## Info
 the project stores all the data locally in a db.sqlite3 file

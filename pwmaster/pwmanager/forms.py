@@ -25,15 +25,15 @@ class SignUpForm(UserCreationForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
-        user.username = user.email
+        user.username = self.cleaned_data['email']
         user.save()
-        return  user  # for activation
+        return user  # for activation
     
     def sendActivationEmail(self, user):
         mail_subject = 'Activate your account.'
         message = render_to_string('acc_active_email.html', {
             'user': user,
-            'domain': settings.SITE_URL,
+            'domain': settings.SITE_URL+":8000",
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
@@ -46,8 +46,8 @@ class SignUpForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class SignInForm(forms.Form):
-    username = forms.CharField(max_length=100, required=True) 
-    password = forms.CharField(max_length=100, required=True)
+    username = forms.CharField(max_length=100, required=True, label="Email:") 
+    password = forms.CharField(max_length=100, required=True, widget=forms.PasswordInput)
 
     def authenticateUser(self, request):
         xusername = self.cleaned_data['username']
@@ -58,7 +58,7 @@ class SignInForm(forms.Form):
     def sendNotification(self, user):
         mail_subject = 'Did you just log in to pwmanager?'
         now = datetime.now()
-        dt_string = now.strftime("%m/%d/%Y %H:%M")
+        dt_string = now.strftime("%m/%d/%Y")
         message = render_to_string('notify_email.html', {
             'user': user,
             'date': dt_string,

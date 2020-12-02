@@ -1,4 +1,4 @@
-{% extends "root.html" %}
+{% extends "rooot.html" %}
 
 {% block title %}
     Password Manager
@@ -139,7 +139,7 @@
         </div>
       </div>
       <div class="banner100 center">
-        <div class="hstack">
+        <div class="lrspace hstack">
           <a id="signupcancel" >CANCEL</a>
           <button type="submit" class="bubble">SUBMIT</button>
         </div>
@@ -163,9 +163,9 @@
         </div>
       </div>
       <div class="banner100 center">
-        <div class="hstack">
+        <div class="lrspace hstack">
           <a id="signincancel" >CANCEL</a>
-          <a href="">FORGOT PASSWORD</a>
+          <a href="{% url 'password_reset' %}">FORGOT PASSWORD</a>
           <button type="submit" class="bubble">SUBMIT</button>
         </div>
       </div>
@@ -184,7 +184,7 @@
         </div>
       </div>
       <div class="banner100 center">
-        <div class="hstack">
+        <div class="lrspace hstack">
           <a id="addpasswordcancel" >CANCEL</a>
           <button type="submit" class="bubble">SUBMIT</button>
         </div>
@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="banner100 center">
-        <div class="hstack">
+        <div class="lrspace hstack">
           <a id="changecancel" >CANCEL</a>
           <button type="submit" class="bubble">SUBMIT</button>
         </div>
@@ -224,7 +224,7 @@
         </div>
       </div>
       <div class="banner100 center">
-        <div class="hstack">
+        <div class="lrspace hstack">
           <a id="deletecancel" >CANCEL</a>
           <button type="submit" class="bubble">SUBMIT</button>
         </div>

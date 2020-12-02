@@ -51,6 +51,7 @@ def signup(request):
         else: 
             context = {"mainmessage":'One or more errors occurred', 'form': form}
             return renderauth(request, "msg.html", context) 
+    return redirect("home")
 
 def signin(request):
     if request.method == 'POST':
