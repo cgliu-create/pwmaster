@@ -1,0 +1,106 @@
+@use 'variables';
+
+* {
+   font-family: variables.$fonts;
+   box-sizing: border-box;
+}
+html, body {
+   margin: 0; 
+   padding: 0;
+   background-color: variables.$white-color;
+   overflow: auto;
+}
+
+.hstack{
+   display: inline-flex;
+   flex-direction: row;
+ }
+.vstack{
+   display: inline-flex;
+   flex-direction: column;
+}
+.stack{
+   display: inline-block;
+}
+
+.forground{
+   z-index: 2;
+}
+.midground{
+   z-index: 1;
+}
+.background{
+   z-index: 0;
+}
+.wrapleft{
+   display: flex; 
+   flex-wrap: wrap; 
+   float: left;
+ }
+.wrapright{
+   display: flex; 
+   flex-wrap: wrap; 
+   float: right;
+}
+.center{
+   width: 100%; 
+   display: flex; 
+   justify-content: center;
+}
+/* text position */
+.lefttext{
+   text-align: left;
+}
+.righttext{
+   text-align: right;
+}
+.centertext{
+   text-align: center;
+}
+.floatleft{
+   float: left;
+}
+.floatright{
+   float: right;
+}
+.darktext{
+   color: variables.$darkblue-color;
+}
+.lighttext{
+   color: variables.$white-color;
+}
+.highlighttextred{
+   color: variables.$highlightred-color;
+}
+.highlighttextgreen{
+   color: variables.$highlightgreen-color;
+}
+.highlighttextpurple{
+   color: variables.$highlightpurple-color;
+}
+
+.section-box {
+  position: relative;
+  padding: 20px;
+  margin-top: -1px;
+}
+.content {
+  max-width: 100vw;
+  min-height: 200px;
+}
+.lrspace{
+   margin-left: 20px;
+   margin-right: 20px;
+}
+.topsection{
+   margin-top: 70px;
+}
+.banner100{
+   width: 100%;
+}
+.banner50{
+   width: 50%;
+}
+.hidden{
+   display: none;
+}

@@ -18,18 +18,18 @@
   <div class="vstack floatleft">
     <a href="{% url 'home' %}">
       {% load static %}
-      <img id="navlogo" src="{%static '/images/logo.png' %}" alt="logo" class="floatleft">
+      <img id="navlogo" src="{%static '/images/logo.png' %}" class="floatleft">
     </a>
     <div id="mobilenav">
       <div class="hstack">
         {% if signin %}
-        <a id="signin" href="{% url 'signinPage' %}">SIGN IN</a>
+        <button id="signinA">SIGN IN</button>
         {% endif %}
         {% if signup %}
-        <a id="signup" class="colorbutton redb" href="{% url 'signupPage' %}">SIGN UP FREE</a>
+        <button id="signupA">SIGN UP FREE</button>
         {% endif %}
         {% if signout %}
-        <a id="signout" class="colorbutton redb" href="{% url 'signoutPage' %}">SIGN OUT</a>
+        <button id="signoutA">SIGN OUT</button>
         {% endif %}
       </div>
     </div>
@@ -37,13 +37,13 @@
     <div id="navbanner">
       <div class="floatright">
         {% if signin %}
-        <a id="signin" href="{% url 'signinPage' %}">SIGN IN</a>
+        <button id="signinB">SIGN IN</button>
         {% endif %}
         {% if signup %}
-        <a id="signup" class="colorbutton redb" href="{% url 'signupPage' %}">SIGN UP FREE</a>
+        <button id="signupB">SIGN UP FREE</button>
         {% endif %}
         {% if signout %}
-        <a id="signout" class="colorbutton redb" href="{% url 'signoutPage' %}">SIGN OUT</a>
+        <button id="signoutB">SIGN OUT</button>
         {% endif %}
       </div>
     </div>

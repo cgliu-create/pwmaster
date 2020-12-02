@@ -37,7 +37,7 @@ class PasswordForm(ModelForm):
 
 class PasswordGeneratorForm(ModelForm):
 
-    def newPassword(self)
+    def newPassword(self):
         letters = self.cleaned_data['letters'] 
         punctuation = self.cleaned_data['punctuation'] 
         digits = self.cleaned_data['digits'] 

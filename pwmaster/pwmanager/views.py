@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from .forms import SignUpForm, PasswordForm, PasswordGeneratorForm
 from .models import Password, Manager
 from .authmenu import renderauth, mergeDict
+from django.contrib.auth.models import User
 import string
 import random
 
@@ -16,12 +17,12 @@ def home(request):
     }
     if request.user.is_authenticated:
         xuser = request.user
-        passwords = Password.objects.filter(user=User(id=xuser.id)
-        pwmanager = Manager.objects.get(user=User(id=xuser.id)).pword
+        passwords = Password.objects.filter(user=User(id=xuser.id))
+        manager = Manager.objects.get(user=User(id=xuser.id))
         authcontext = {
             'user': xuser,
             'passwords': passwords,
-            'pwmanager': pwmanager,
+            'manager': manager,
         }
         temp = mergeDict(context, authcontext)
         context = temp
@@ -80,7 +81,7 @@ def deletepassword(request):
             xuser = request.user 
             xname = self.cleaned_data['name']
             xpwword = self.cleaned_data['pword']
-            passwords = Password.objects.filter(user=User(id=xuser.id)
+            passwords = Password.objects.filter(user=User(id=xuser.id))
             passwords = passwords.filter(name=xname)
             passwords = passwords.filter(pwword=xpwword)
             passwords.first().delete()

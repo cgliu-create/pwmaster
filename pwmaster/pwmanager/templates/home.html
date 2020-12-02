@@ -1,0 +1,119 @@
+{% extends "root.html" %}
+
+{% block title %}
+    Password Manager
+{% endblock %}
+
+{% block external %}
+  {% load static %}
+  <script src="{%static '/js/togglemodals.js' %}"></script>
+{% endblock %}
+
+
+{% block stuff %} 
+<div class="section-box">
+  <div class="content topsection">
+    
+    <div class="textsectiona hstack banner100">
+      <h1>
+      </h1>
+    </div>
+
+  </div>
+</div>
+
+<div id="signupform" class="modal">
+  <div class="content">
+    <form action="{% url 'signup' %}" method="post"> 
+      {% csrf_token %} 
+      <div class="banner100 center">
+        <div class="vstack lrspace">
+          <h1>
+            Sign Up
+          </h1>
+          <br>
+          {{ signupform }}
+          <br>
+        </div>
+      </div>
+      <div class="banner100 center">
+        <div class="hstack">
+          <a id="signupcancel" class="otherbutton">CANCEL</a>
+          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+
+<div id="signinform" class="modal">
+  <div class="content">
+    <form action="{% url 'signin' %}" method="post"> 
+      {% csrf_token %} 
+      <div class="banner100 center">
+        <div class="vstack">
+          <h1>
+            Sign In
+          </h1>
+          <br>
+          {{ signinform }}
+          <label for="username">Email:</label>
+          <input type="text" name="username" id="username"> 
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password">
+          <br>
+        </div>
+      </div>
+      <div class="banner100 center">
+        <div class="hstack">
+          <a id="signincancel" class="otherbutton">CANCEL</a>
+          <a href="">FORGOT PASSWORD</a>
+          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+
+<div id="passwordform" class="modal">
+  <div class="content">
+    <form action="{% url 'create' %}" method="post"> 
+      {% csrf_token %} 
+      <div class="banner100 center">
+        <div class="vstack">
+          <br>
+          {{ passwordform }}
+        </div>
+      </div>
+      <div class="banner100 center">
+        <div class="hstack">
+          <a id="addpasswordcancel" class="otherbutton">CANCEL</a>
+          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+
+<div id="generateform" class="modal">
+  <div class="content">
+    <form action="{% url 'generate' %}" method="post"> 
+      {% csrf_token %} 
+      <div class="banner100 center">
+        <div class="vstack">
+          <br>
+          {{ generatorform }}
+        </div>
+      </div>
+      <div class="banner100 center">
+        <div class="hstack">
+          <a id="generatepasswordcancel" class="otherbutton">CANCEL</a>
+          <button type="submit" class="colorbutton purpleb">SUBMIT</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+{% endblock %}
+
+

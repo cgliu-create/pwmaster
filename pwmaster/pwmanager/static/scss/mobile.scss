@@ -1,0 +1,133 @@
+@use 'variables';
+
+#hamburger{
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 40px;
+    font-weight: bold;
+    border: none;
+    padding: 14px 16px;
+    margin: 0;
+    background-color: variables.$white-color;
+    display: none;
+}
+#hamburger:hover{
+    background-color: variables.$darkblue-color; 
+    color: variables.$white-color;
+    cursor: pointer;
+}
+#mobilenav{
+    float: left;
+    display: none;
+    ul{
+        list-style: none;
+        display: none;
+    }
+    font-size:20px;
+    font-weight: bold;
+}
+
+h1{
+    font-size: 70px;
+    color: #041626;
+}
+h2{
+    font-size: 30px;
+    color: #041626; 
+}
+h3{
+    font-size: 70px;
+    color: #041626;
+}
+h4{
+    font-size: 20px;
+    color: #041626; 
+}
+.autoimg{
+    width: fit-content; 
+    height: fit-content; 
+    display: inline-block;
+}
+p{
+    max-width: 800px;
+}
+.collapsecontent{
+    display: none;
+}
+@media only screen and (max-width: 1300px) {
+    #hamburger{
+        display: block;
+    }
+    #navbanner{
+        display: none; 
+    }
+    h1{
+        font-size: 50px;
+    }
+    h3{
+        font-size: 35px;
+    }
+    .halfimg{
+        max-width: 600px;
+        width: 100vw;
+        height: auto;
+    }
+    .textsectiona{
+        flex-direction: column;
+    }
+    .textsectionb{
+        flex-direction: column-reverse;
+    }
+ }
+ @media only screen and (max-width: 600px){
+    #navlogo{
+        width: 250px;
+        height: auto;
+    } 
+    h1{
+        font-size: 30px;
+    }
+    h3{
+        font-size: 25px;
+    }
+    h2{
+        font-size: 20px;
+    }
+    .halfimg{
+        max-width: 300px;
+        width: 100vw;
+        height: auto;
+    }
+    #modelone {
+        max-width: 250px;
+        max-height: 90px;
+    }
+    .umbrellas{
+        height: 100px; 
+    }
+    a {
+        font-size: 15px
+    }
+    button {
+        font-size: 15px 
+    }
+    footer {
+        font-size: 15px 
+    }
+    .autoimg {
+        max-width: 400px;
+        max-height: 200px;
+    }
+    input[type=text], [type=password], [type=email], [type=url], textarea {
+        max-width: 300px;
+    }
+    .specialselect{
+        max-width: 300px;
+    }
+ }
+ @media only screen and (max-width: 500px){
+   .wrapleft { //team.html
+        margin-left: 15vw;
+    }
+ }
