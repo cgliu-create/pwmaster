@@ -133,10 +133,31 @@ function toggledark2(id) {
       }
     }
 }
+function toggledark3(clss) {
+  let things = document.getElementsByClassName(clss);
+  for (let thing of things) {
+      let thingy = thing;
+      if (thingy.style.background != "black") {
+        darkit(thingy)
+      } else {
+        thingy.style.background = "#041626";
+      }
+    }
+}
 
 function darkmode(){
   toggledark("div");
   toggledark2("hamburger");
+  toggledark2("signinA");
+  toggledark2("signinB"); 
+  toggledark3("bubble");
+  toggledark("h1")
+  toggledark2("addpassword");
+  toggledark2("changepassword");
+  toggledark2("deletepassword");
+  toggledark("a");
+
+
   logo1 = document.getElementById("logolight")
   logo2 = document.getElementById("logodark")
   if (logo1.style.display != "none") {
